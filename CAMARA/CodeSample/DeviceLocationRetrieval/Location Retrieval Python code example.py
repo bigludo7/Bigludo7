@@ -9,11 +9,9 @@ def get_access_token(client_id, client_secret, scope):
         'client_secret': client_secret,
         'scope': scope
     }
-
     response = requests.post(token_url, data=payload)
     response_data = response.json()
     access_token = response_data.get('access_token')
-
     return response_data['access_token']
 
 def call_api(access_token):
