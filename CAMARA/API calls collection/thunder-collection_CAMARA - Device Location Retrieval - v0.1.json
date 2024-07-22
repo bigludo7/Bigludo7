@@ -1,0 +1,256 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "CAMARA - Device Location Retrieval - v0.1",
+    "collectionId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+    "dateExported": "2024-07-22T11:58:21.047Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "3579092d-b8d0-47ad-835c-7832843d4bd0",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "200 - retrieve device location",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-10-09T11:47:51.530Z",
+            "modified": "2024-07-22T07:15:29.085Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"phoneNumber\": \"+33699901032\"\n  },\n  \"maxAge\": 6000\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.area.areaType",
+                    "action": "equal",
+                    "value": "CIRCLE"
+                }
+            ]
+        },
+        {
+            "_id": "3a2895d3-8246-4376-87c7-a5c5f7ce0473",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "200 - retrieve device without maxAge",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-04T12:48:25.654Z",
+            "modified": "2024-07-17T06:57:28.696Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"phoneNumber\": \"+33699901032\"\n  }\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.area.areaType",
+                    "action": "equal",
+                    "value": "CIRCLE"
+                }
+            ]
+        },
+        {
+            "_id": "683bda6e-8af5-43fb-add3-6a47a577f1a2",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "200 - retrieve device location with maxAge 0",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-04T12:51:45.907Z",
+            "modified": "2024-07-22T07:17:26.729Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"phoneNumber\": \"+33699901032\"\n  },\n  \"maxAge\": 0\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "0bf4462b-7866-4159-b25c-6344e11d1eb5",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "422 DEVICE_NOT_APPLICABLE",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-07-17T06:57:45.286Z",
+            "modified": "2024-07-22T08:59:54.452Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"phoneNumber\": \"+33689758614\"\n  },\n  \"maxAge\": 0\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "422"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "DEVICE_NOT_APPLICABLE"
+                }
+            ]
+        },
+        {
+            "_id": "fb683576-d5ac-4791-8d83-bc4d1f58d602",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "404- Device OFF",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-07-22T08:54:55.920Z",
+            "modified": "2024-07-22T08:57:02.894Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"phoneNumber\": \"+33699901064\"\n  }\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "LOCATION_RETRIEVAL.DEVICE_NOT_FOUND"
+                }
+            ]
+        },
+        {
+            "_id": "793b8048-1323-4029-b4ea-a086072a40fc",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "422 UNSUPPORTED_DEVICE_IDENTIFIERS",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-07-17T06:58:49.399Z",
+            "modified": "2024-07-17T07:20:56.403Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n    \"ipv6Address\": \"2001:db8:85a3:8d3:1319:8a2e:370:7344\"\n  },\n  \"maxAge\": 0\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "422"
+                }
+            ]
+        },
+        {
+            "_id": "d129c7c0-d40a-4293-b973-0de6000fb2bc",
+            "colId": "fd75ff30-3a3b-40af-89c2-aa67a9c20e6d",
+            "containerId": "",
+            "name": "400 INVALID_ARGUMENT",
+            "url": "https://api.orange.com/camara/location-retrieval/orange-lab/v0/retrieve",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-07-17T07:18:39.079Z",
+            "modified": "2024-07-22T09:00:33.459Z",
+            "headers": [
+                {
+                    "name": "x-correlator",
+                    "value": "{{X-CORRELATOR-VALUE}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"device\": {\n  },\n  \"maxAge\": 0\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "INVALID_ARGUMEN"
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "auth": {
+            "type": "oauth2",
+            "oauth2": {
+                "grantType": "client_credentials",
+                "tokenUrl": "https://api.orange.com/oauth/v3/token",
+                "clientId": "{{CLIENT_ID_SANDBOX}}",
+                "clientSecret": "{{CLIENT_SECRET_SANDBOX}}",
+                "clientAuth": "in-header"
+            }
+        },
+        "envId": "5a63de2c-4ace-427a-b375-28c0f872b12c"
+    },
+    "ref": "ODwsOq-1plWWyApgDnrqqAtn88I-PrSgTQ6a1BLSrB9LmA2SdAYHMkTgJolf1mFFzJ4MxFdbFizaO4dv09lZ0g"
+}
